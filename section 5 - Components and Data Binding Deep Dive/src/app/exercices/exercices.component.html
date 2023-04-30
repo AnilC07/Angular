@@ -1,0 +1,7 @@
+<button (click)='onDisplayHide()' class="btn btn-binary">
+  Display Details
+</button>
+<p *ngIf="displayPara">CrazyFrog458</p>
+<p *ngFor="let log of array" [ngStyle]="{backgroundColor:log>=5 ? 'blue': 'transparent'}" [ngClass]="{whiteText:log >= 5}">
+  {{log}}</p>
+
