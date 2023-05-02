@@ -1,0 +1,9 @@
+<div class="container">
+  <h1 class="text-center">This is a Game</h1>
+  <hr>
+  <app-game-control (timerEventEmitter)="onTimerEventEmitter($event)"></app-game-control>
+  <hr>
+  <app-odd-component [number]="oddNumbers"></app-odd-component>
+  <hr>
+  <app-even-component [number]="evenNumbers"></app-even-component>
+</div>

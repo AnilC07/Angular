@@ -1,0 +1,11 @@
+button
+{
+  display: block;
+
+}
+
+.btn-controls{
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
