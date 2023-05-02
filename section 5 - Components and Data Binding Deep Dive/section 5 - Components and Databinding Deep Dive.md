@@ -41,11 +41,34 @@ chez le parent, avoir une proprite ou stocker la valeur et une methode pour push
 <input type="text" id="item" #newItem /> // #newItem est un marqueur grace auquel, on va pouvoir acceder au data de l'input comme ca valeur. on l'utilise ensuite pour donner sa valeur en argument a la fonction.
 <button type="button" (click)="addNewItem(newItem.value)">Add this new item</button>
 
+##reference locale dans le template (pour remplacer le two way binding)
 
 dans le html  du parent, 
 on bind levenement du click avec la methode addItem(). le nom de levenement doit correspondre au nom de la propiete qui a le decorateur output:
 <app-output (newItemEvent)="addItem($event)"></app-output> // qui va push les data present dans le event dans le tableau
 
+On peut egalement avoir accer au donner du DOM (comme un input) via le decorateur @viewchild defini comme suit:
 
+@ViewChild('serverContentInput', {static:true}) serverContentInput: ElementRef;
+
+Prend en argument la reference dans le dom et un second argument et est de type ElementRef
+
+    this.serverCreated.emit({ serverName: nameInput.value, serverContent: this.serverContentInput.nativeElement.value });
+
+- La directive ng-content
+par defaut, tout ce qui se trouve entre les balise du composant et perdu. Pour y remedier, on utilise le hook <ng-content></ng-content> dans le composant.
+Tout ce qui sera entre les balises, sera projeter dans le composant 
+
+- Quelques Hooks
+ - ngOnChanges : Appeler apres un changement dans un composant qui prend le hook @Input()
+ - ngOnInit : Appeler une fois que le composant est initialiser
+ - ngDoCheck : Appeler apres chaque changement
+ - ngAfterContentInit : Appeler après que le contenu (ng-content) est ete projeté
+ - ngAfterContentChecked : Appele a chaque fois que le contenu projete et verifié
+ - ngAfterViewInit : Appeler une fois que la vu du parent et des enfants a ete init
+ - ngAfterViewChecked : Appelere a chaque fois que la vue et celui de ses enfant ont ete verifier
+ - ngOnDestroy : appeler quand le composant doit etre detruit(par exemple un rendu conditionnel qui passe a false)
+
+On ne peut pas verifier la valeur d'un element du Domm Avant d'avoir atteint le hook "AfterViewInit"
 
 
