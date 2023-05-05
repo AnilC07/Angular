@@ -1,0 +1,56 @@
+Section 7 - Directives
+
+Attribute directives :
+Ceux sont des directives placé directement sur l'attributs
+
+Structural directives :
+Modifie la structure du Dom autour de cette element. Par exemple affichage conditionnelle d'un texte ou un for qui va afficher autant de fois que necessaire, un element
+
+*ngFor
+
+*ngIf
+
+ngClasse
+
+ngStyle
+
+Creation de no propre directives :
+exemple de directive perso:
+1 - créée le fichier comme un composant mais en .directive (un html, css, ts)
+  - lui donner un selector
+  - dans le constructor donner en argument une propriete elementRef en private de type ElementRef
+
+export class BasicHighlightDirective implements OnInit{
+constructor(private elementRef: ElementRef){
+}
+
+ngOnInit(): void {
+  this.elementRef.nativeElement.style.opacity = '0.5'
+}
+}
+
+dans la fonction ngOnInit() {} on vient modifier le style via la propriete elementRef
+
+on touche direcetement au composant avec cette methode et cee n'est pas la meilleur solution.
+Voyons une autre solution:
+
+utiliser la methode renderer pour acceder au Dom:
+
+export class BetterHighlightDirective implements OnInit {
+
+  constructor(private elRef: ElementRef, private renderer: Renderer2) { }
+
+
+  ngOnInit(){
+    this.renderer.setStyle(this.elRef.nativeElement, 'background-color','lightblue')
+  }
+}
+
+Un autre moyen est d'utiliser le decorateur @HostBinding() qui prend en argument la methode 'style.la propriete que l'on veut appliquer'.
+Exemple:
+  @HostBinding('style.backgroundColor') backgroundColor:string='transparent'
+  ...
+    this.backgroundColor = 'lightblue'
+
+
+Comment créé& nos propres directives 
