@@ -1,0 +1,18 @@
+Service et dependencies
+
+Quest ce que c'est
+
+les services sont comme les contexte en reactJS. C'est quelque chose de decentraliser que l'on peut appeler dans le composant ou on en a besoin
+Les service sont simplement des class normal et n'on pas besoin de décorateur. Ils ne doive pas etre importer et on doit pas creeer de nouvel instance de celui-ci. Il existe un moyen de les utiliser dans Angular. C'est l'injecteur de dependence. Il faus indiquer a angular que l'on veu l'utiliser en faisant ceci:
+
+constructor(private loggingService:LoggingService) => important, le type doit etre la classe que on veut injecter.
+Nous devons egalement le 'provide'
+
+ajouter la propriete 'providers' au decorateur comme ceci:
+provider:[Sevice]
+
+
+il Y a une histoire de hierarchie. si un service est appeler dans un composant, ses enfant herite automatiquement de ce service. si tu re instanci ca chez un enfant, ca sera une instance a part. le plus haut niveau n'est pas app.component mais le module.ts.
+
+On peut egalement appeler un service dans un service,
+Important a retenir, ajouter un decorateur '@Injectable()' dans le service qui recois le service
